@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احتفال صغنن ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            color: #4a4a4a;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        p {
+            font-size: 17px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffb6c1;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #d63384;
+            box-shadow: 0 0 8px rgba(214, 51, 132, 0.2);
+        }
+        button {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .options-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .option-btn {
+            background: #fff0f5;
+            border: 2px solid #ffb6c1;
+            color: #d63384;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .option-btn:hover {
+            background: #ffe4e1;
+            border-color: #d63384;
+        }
+        .alert-msg {
+            color: #ff0055;
+            font-weight: 700;
+            margin-top: 15px;
+            font-size: 16px;
+            animation: shake 0.5s;
+        }
+        .success-msg {
+            color: #28a745;
+            font-weight: 700;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .media-box {
+            margin: 15px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #000;
+        }
+        audio {
+            width: 100%;
+            border-radius: 10px;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            border-radius: 10px;
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            border-radius: 10px 10px 0 0;
+            display: block;
+            object-fit: contain;
+        }
+        .img-caption {
+            background: #fff0f5;
+            color: #d63384;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            border-top: 2px dashed #ffb6c1;
+        }
+        .hidden {
+            display: none;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffb6c1;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            height: 100px;
+            resize: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <!-- الخطوة 1: الاسم -->
+    <div id="step-1">
+        <h2>أهلاً بيك يا حياتي ❤️</h2>
+        <p>اكتبلي اسمك هنا يحبيبي:</p>
+        <input type="text" id="user-name-input" placeholder="اكتب هناا ...">
+        <button onclick="saveName()">اللي بعدوو</button>
+    </div>
+
+    <!-- الخطوة 2: تاريخ قراية الفاتحة -->
+    <div id="step-2" class="hidden">
+        <h2>اختبار الذاكرة 😉</h2>
+        <p>فاكر قراية فاتحتنا؟؟ اختار التاريخ الصح:</p>
+        <div class="options-grid" id="date-options">
+            <button class="option-btn" onclick="checkDate('15/5/2025', this)">15/5/2025</button>
+            <button class="option-btn" onclick="checkDate('9/10/2026', this)">9/10/2026</button>
+            <button class="option-btn" onclick="checkDate('1/1/2026', this)">1/1/2026</button>
+            <button class="option-btn" onclick="checkDate('20/12/2025', this)">20/12/2025</button>
+        </div>
+        <div id="date-feedback"></div>
+    </div>
+
+    <!-- الخطوة 3: الانتقال للأسئلة -->
+    <div id="step-3" class="hidden">
+        <h2 id="welcome-user"></h2>
+        <p>الصراحة عايزه اتعبك شوية وتجاوبلي علي الاسئله دي<br>وخد بالك مفيش تراجع فالإجابة 😌</p>
+        <button onclick="startQuiz()">يلا بينا نكمل </button>
+    </div>
+
+    <!-- السؤال الأول -->
+    <div id="q1-box" class="hidden">
+        <h2>السؤال الأول 💭</h2>
+        <p>انا نكدية ولا فرفوشه؟</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="answerQ1('نكدية')">نكدية 🙄</button>
+            <button class="option-btn" onclick="answerQ1('فرفوشه')">فرفوشه 🥰</button>
+        </div>
+        <div id="q1-feedback"></div>
+    </div>
+
+    <!-- السؤال الثاني -->
+    <div id="q2-box" class="hidden">
+        <h2>السؤال الثاني 💭</h2>
+        <p>مين قال للتاني بحبك الاول؟</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="answerQ2('انا')">انا 🙋‍♂️</button>
+            <button class="option-btn" onclick="answerQ2('انتي')">إنتى 🧕</button>
+        </div>
+        <div id="q2-feedback"></div>
+    </div>
+
+    <!-- السؤال الثالث -->
+    <div id="q3-box" class="hidden">
+        <h2>السؤال الثالث 💭</h2>
+        <p>انا احلى ولا ياسمين صبرى؟</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="answerQ3('wrong')">انتي طبعا يقلبي ❤️</button>
+            <button class="option-btn" onclick="answerQ3('wrong')">مين ياسمين صبري جمبك 😍</button>
+            <button class="option-btn" onclick="answerQ3('wrong')">ايسو حبيبتي متتقارنش لحد 👑</button>
+            <button class="option-btn" onclick="answerQ3('correct')">كل ما سبق 😎</button>
+        </div>
+        <div id="q3-feedback"></div>
+    </div>
+
+    <!-- النتيجة والهدية -->
+    <div id="result-box" class="hidden">
+        <h2 id="score-title"></h2>
+        <p>وعشان انت شطور تاخد هدية دوس هنا 👇</p>
+        <button onclick="showGift()">فتح الهدية 🎁</button>
+    </div>
+
+    <!-- محتوى الهدية -->
+    <div id="gift-box" class="hidden">
+        <h2>مفاجأتك يا قلبي 🎶</h2>
+        <p>اسمع الأغنية واتفرج على الفيديو والصورة بحب:</p>
+        
+        <div class="media-box" style="background: transparent;">
+            <audio controls src="song.mp3">
+                متصفحك لا يدعم الصوت
+            </audio>
+        </div>
+
+        <div class="media-box">
+            <video controls playsinline src="video.mp4">
+                متصفحك لا يدعم الفيديو
+            </video>
+        </div>
+
+        <div class="media-box">
+            <img src="photo.jpg" alt="صورة حلوة">
+            <div class="img-caption">صورة تشبه الحصول علي كأس العالم أو القرصان اللي لقى الكنز أخيرااا 🏆🏴‍☠️❤️</div>
+        </div>
+
+        <button onclick="showFinalMessage()">خلصت هعع، كمل كلامنا </button>
+    </div>
+
+    <!-- الرسالة النهائية والرد -->
+    <div id="final-msg-box" class="hidden">
+        <h2>رسالة من إيسو حبيبتك 💕</h2>
+        <p style="background: #fff0f5; padding: 15px; border-radius: 12px; border: 1px dashed #d63384; white-space: pre-line;">
+من شهر وإنت أجمل وأعز حاجة حصلتلي في حياتي يا طروقه شهر عدى على أجمل بداية في عمري، 
+ومن يومها وأنا كل يوم بتأكد أكتر إن ربنا بيحبني وعوضني خير و رزقني بأحن وأغلى إنسان فالدنيا. 
+اليوم ده كان نقطة تحول في حياتي وبداية لكل حاجة حلوة عشتها ولسه هعيشها معاك.
+ شكراً لكونك الأمان والسند الحقيقي اللي دايماً بطمن
+ وهو جنبي وببقي طايره من الفرحه لما اسمع صوتك ربنا يديمك ليا نعمة، ونحتفل سوا بكل الشهور والسنين الجاية وإنا مع بعض في بيت واحد قريب قوي يا رب، 
+وتفضل دايماً ضحكة قلبي ومنور دنيتي كلها وتكون بابا واخويا وصاحبي وكل دنيتي
+ وانا واثقه انك هتكون كدا وواثقه اني مش هندم علي اختياري ليك ابدا ❤️❤️❤️❤️❤️❤️❤️❤️
+
+بحبك اوي 🥹🏡🫂🌍✨ 
+        </p>
+        <p style="margin-top: 15px;">انت كمان بتحبني ؟</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="setFinalChoice('آه بعشقك')">آه ❤️</button>
+            <button class="option-btn" onclick="setFinalChoice('آه برضو بموتفيكي')">آه برضو 😍</button>
+        </div>
+        <div id="final-choice-display" class="success-msg"></div>
+
+        <p style="margin-top: 15px;">هابي ماسدج من قلبك ليا بقى:</p>
+        <textarea id="user-final-message" placeholder="اكتب رسالتك هنا يا حبيبي..."></textarea>
+        
+        <!-- زر الإرسال عبر الواتساب -->
+        <button id="send-btn" onclick="sendDataToWhatsApp()">سيند لإيسو حبيبتي 💌</button>
+        <div id="send-status"></div>
+    </div>
+</div>
+
+<script>
+    let userData = {
+        name: "",
+        dateAttempts: 0,
+        score: 0,
+        q1Answer: "",
+        q2Answer: "",
+        finalChoice: ""
+    };
+
+    function saveName() {
+        const nameInput = document.getElementById("user-name-input").value.trim();
+        if(nameInput === "") {
+            alert("اكتب اسمك الأول يا حبيبي 😡");
+            return;
+        }
+        userData.name = nameInput;
+        document.getElementById("step-1").classList.add("hidden");
+        document.getElementById("step-2").classList.remove("hidden");
+    }
+
+    function checkDate(selectedDate, btn) {
+        const feedback = document.getElementById("date-feedback");
+        if(selectedDate === "9/10/2026") {
+            feedback.innerHTML = "<div class='success-msg'>اشطر كوتي 😋</div>";
+            setTimeout(() => {
+                document.getElementById("step-2").classList.add("hidden");
+                document.getElementById("step-3").classList.remove("hidden");
+                document.getElementById("welcome-user").innerText = "أهلاً يا " + userData.name + " يا حبيبي ❤️";
+            }, 1500);
+        } else {
+            userData.dateAttempts++;
+            if(userData.dateAttempts === 1) {
+                feedback.innerHTML = "<div class='alert-msg'>فيها نكد شهر خد بالك 😡</div>";
+                btn.style.background = "#ffcccc";
+            } else {
+                feedback.innerHTML = "<div class='alert-msg'>بتهزر😡؟؟</div>";
+                btn.style.background = "#ff9999";
+            }
+        }
+    }
+
+    function startQuiz() {
+        document.getElementById("step-3").classList.add("hidden");
+        document.getElementById("q1-box").classList.remove("hidden");
+    }
+
+    function answerQ1(ans) {
+        userData.q1Answer = ans;
+        const feedback = document.getElementById("q1-feedback");
+        if(ans === 'نكدية') {
+            feedback.innerHTML = "<div class='alert-msg'>الصراحة آه بس فيها نكد شهر 😡</div>";
+        } else {
+            feedback.innerHTML = "<div class='success-msg'>كذاب بس بحبك😂❣️</div>";
+            userData.score++;
+        }
+        setTimeout(() => {
+            document.getElementById("q1-box").classList.add("hidden");
+            document.getElementById("q2-box").classList.remove("hidden");
+        }, 1800);
+    }
+
+    function answerQ2(ans) {
+        userData.q2Answer = ans;
+        const feedback = document.getElementById("q2-feedback");
+        if(ans === 'انا') {
+            feedback.innerHTML = "<div class='success-msg'>حصل😂</div>";
+            userData.score++;
+        } else {
+            feedback.innerHTML = "<div class='alert-msg'>هنكذب بقا ها😡</div>";
+        }
+        setTimeout(() => {
+            document.getElementById("q2-box").classList.add("hidden");
+            document.getElementById("q3-box").classList.remove("hidden");
+        }, 1800);
+    }
+
+    function answerQ3(type) {
+        const feedback = document.getElementById("q3-feedback");
+        if(type === 'correct') {
+            feedback.innerHTML = "<div class='success-msg'>شطور يا عيوني </div>";
+            userData.score++;
+            setTimeout(() => {
+                document.getElementById("q3-box").classList.add("hidden");
+                document.getElementById("result-box").classList.remove("hidden");
+                document.getElementById("score-title").innerText = "جاب " + userData.score + " من 3 يا بطلى 🎉";
+            }, 1500);
+        } else {
+            feedback.innerHTML = "<div class='alert-msg'>يعم اقرأ باقي الاوبشنز 🙄</div>";
+        }
+    }
+
+    function showGift() {
+        document.getElementById("result-box").classList.add("hidden");
+        document.getElementById("gift-box").classList.remove("hidden");
+    }
+
+    function showFinalMessage() {
+        document.getElementById("gift-box").classList.add("hidden");
+        document.getElementById("final-msg-box").classList.remove("hidden");
+    }
+
+    function setFinalChoice(choice) {
+        userData.finalChoice = choice;
+        document.getElementById("final-choice-display").innerText = "اختيارك: " + choice + " ❤️";
+    }
+
+    function sendDataToWhatsApp() {
+        const messageText = document.getElementById("user-final-message").value.trim();
+        
+        // ⚠️ [ضعي رقم هاتفك هنا بصيغة الدولى مثل: 201029843295 بدلاً من الأرقام الافتراضية]
+        const myPhoneNumber = "201029843295"; 
+
+        const fullText = `🥰 نتيجة احتفالنا يا إيسو:\n\n` +
+                         `👤 اسم الحبيب: ${userData.name}\n` +
+                         `⭐ الدرجة: ${userData.score} من 3\n` +
+                         `💭 إجابة السؤال الأول: ${userData.q1Answer}\n` +
+                         `💭 إجابة السؤال الثاني: ${userData.q2Answer}\n` +
+                         `💬 إجابة السؤال الأخير: ${userData.finalChoice}\n` +
+                         `💌 رسالته من القلب: ${messageText}`;
+
+        const encodedMessage = encodeURIComponent(fullText);
+        const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${encodedMessage}`;
+
+        document.getElementById("send-status").innerHTML = "<div class='success-msg'>جاري فتح الواتساب لإرسال رسالتك... ✨</div>";
+        
+        setTimeout(() => {
+            window.location.href = whatsappUrl;
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
